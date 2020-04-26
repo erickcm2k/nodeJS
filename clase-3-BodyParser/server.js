@@ -18,9 +18,10 @@ router.post('/', function(req, res) {
 })
 
 router.delete('/', function(req, res) {
-    console.log(req.query)
+    console.log(req.query) // Usada para acceder a los parámetros por query. Ejemplo: http://localhost:3000?orderBy=id&age=18
     console.log(req.body)
-    res.send('Something has been deleted!')
+    //res.send('Something has been deleted!')
+    res.send(`Mensaje = ${req.body.text}`)
 })
 
 
