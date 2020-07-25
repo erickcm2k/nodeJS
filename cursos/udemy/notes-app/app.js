@@ -1,4 +1,5 @@
+const validator = require('validator')
 const myNotes = require('./util')
 
 const msg = myNotes()
-console.log(msg)
+console.log(validator.isPort('8080'))
