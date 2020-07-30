@@ -1,4 +1,4 @@
-const getNotes = require('./notes');
+const notes = require('./notes');
 const yargs = require('yargs');
 const chalk = require('chalk');
 
@@ -24,8 +24,7 @@ yargs.command({
         }        
     },
     handler: function(argv) {
-        console.log('Adding a new note:', argv.title);
-        console.log('Title:', argv.body);
++       notes.addNote(argv.title, argv.body);
     }
 });
 
