@@ -1,2 +1,3 @@
-# nodePlatzi
-repositorio del curso de node de Platzi
+# NodeJS
+
+Notes and projects created using NodeJS
