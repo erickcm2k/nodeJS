@@ -3,18 +3,41 @@ const chalk = require('chalk');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
+if(process.argv[2]) {
 
-geocode('Boston', (error, data) => {
-    console.log('Error:', error);
-    console.log('Data:', data);
-});
+    var location = process.argv[2];
+    
+    geocode(location, (error, data) => {
+        if(error) {
+            console.log(error);
+        }
+        else {
+            var coordinates = `${data.latitude},${data.longitude}`;
+            forecast(coordinates, (error, data) => {
+                if(error) {
+                    console.log('Error:', error);
+                } else {                
+                    console.log('Data:', data);
+                }
+            });
+        }
+    });
+} else {
+    console.log('No location provided.');
+}
+
+
+// geocode('Boston', (error, data) => {
+//     console.log('Error:', error);
+//     console.log('Data:', data);
+// });
 
 
 
-forecast('40.7831,-73.9712', (error, data) => {
-    console.log('Error:', error);
-    console.log('Data', data);
-});
+// forecast('40.7831,-73.9712', (error, data) => {
+//     console.log('Error:', error);
+//     console.log('Data', data);
+// });
 
 {
     // const MAPBOX_API = 'https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.json?limit=1&language=ES&country=US&access_token=pk.eyJ1IjoiZXJpY2tjZTQwIiwiYSI6ImNrZHE1cWh1eTBjbHQyeHBibHE0aWFrM3MifQ.asM8QMKQsHcfervqFsenBA';

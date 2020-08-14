@@ -10,7 +10,7 @@ const forecast = (address, callback) => {
         } 
         else if(response.body.error) 
         {
-            callback(`Unable to find location. Check your querry.`, undefined);
+            callback(`Weatherstack.com: Unable to find location. Check your querry.`, undefined);
         } else {
             callback(undefined, {
                 location: `${response.body.location.name}, ${response.body.location.country}, ${response.body.location.region}`,
