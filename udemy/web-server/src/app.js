@@ -48,6 +48,13 @@ app.get('/weather', (req, res) => {
     });
 });
 
+app.get('/weather', (req, res) => {
+    res.send({
+        forecast: 'It is snowing',
+        location: 'philadelphia'
+    });
+});
+
 app.get('/help/*', (req, res) => {
     res.render('404', {
         title: '404',
