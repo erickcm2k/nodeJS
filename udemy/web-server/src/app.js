@@ -23,21 +23,21 @@ app.use(express.static(publicDirectory));
 app.get('/', (req, res) => {
   // Renders one view.
   res.render('index', {
-    title: 'Main Section',
+    title: 'Weather App',
     name: 'Erick',
   });
 });
 
 app.get('/about', (req, res) => {
   res.render('about', {
-    title: 'About Us Section',
+    title: 'About Us',
     name: 'Erick',
   });
 });
 
 app.get('/help', (req, res) => {
   res.render('help', {
-    title: 'Help Section',
+    title: 'Help',
     message: 'We are here for helping you',
     name: 'Erick',
   });
