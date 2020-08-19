@@ -52,18 +52,18 @@ app.get('/weather', (req, res) => {
 
   const { address } = req.query;
 
-  geocode(address, (error, data) => {
+  geocode(address, (error, { latitude, longitude, location } = {}) => {
     if (error) {
       return res.send({ error });
     }
 
-    const coordinates = `${data.latitude},${data.longitude}`;
-    forecast(coordinates, (error, data) => {
+    const coordinates = `${latitude},${longitude}`;
+    forecast(coordinates, (error, forecastData) => {
       if (error) {
         console.log('Error:', error);
       } else {
-        console.log('Data:', data);
-        const { temperature, feelslike, location } = data;
+        console.log('Data:', forecastData);
+        const { temperature, feelslike } = forecastData;
         res.send({
           forecast: `Current temperature is ${temperature}, but feels like ${feelslike}`,
           location,
