@@ -47,10 +47,15 @@ router.patch('/users/:id', async (req, res) => {
   }
 
   try {
-    const user = await User.findByIdAndUpdate(
-      req.params.id, req.body,
-      { new: true, runValidators: true },
-    );
+    // Use instead of findByIdAndUpdate
+    const user = await User.findById(req.params.id);
+    // Overwriting the previous user with new fields from request
+    updates.forEach((update) => user[update] = req.body[update]);
+    await user.save();
+    // const user = await User.findByIdAndUpdate(
+    //   req.params.id, req.body,
+    //   { new: true, runValidators: true },
+    // );
     if (!user) {
       return res.status(404).send();
     }
