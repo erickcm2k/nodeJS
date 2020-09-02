@@ -14,10 +14,20 @@ router.post('/users', async (req, res) => {
   }
 });
 
+// Router for sign in users
+router.post('/users/login', async (req, res) => {
+  try {
+    const user = await User.findByCredentials(req.body.email, req.body.password);
+    res.send(user);
+  } catch (error) {
+    res.status(404).send();
+  }
+});
+
 router.get('/users', async (req, res) => {
   try {
     const users = await User.find({});
-    res.send(users);
+    res.send(users, 'loged in!');
   } catch (error) {
     res.status(400).send(error);
   }
