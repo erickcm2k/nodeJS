@@ -43,12 +43,14 @@ const userSchema = new mongoose.Schema({
       }
     },
   },
-  tokens: [{
-    token: {
-      type: String,
-      required: true,
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true,
+      },
     },
-  }],
+  ],
 });
 
 /**
@@ -60,7 +62,6 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
   const token = jwt.sign({ _id: user._id.toString() }, 'thisisacourse');
-  console.log(token);
   user.tokens = user.tokens.concat({ token });
   await user.save();
   return token;
@@ -70,6 +71,8 @@ userSchema.methods.generateAuthToken = async function () {
  *
  * Static are accesible on the MODEL.
  * Usually called 'model methods'.
+ *
+ * Custom methos for find user by email and password
  *
  */
 userSchema.statics.findByCredentials = async (email, password) => {
