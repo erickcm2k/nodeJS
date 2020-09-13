@@ -40,6 +40,40 @@ router.post('/users/login', async (req, res) => {
 /**
  *
  *
+ * Logout route for user
+ *
+ *
+ */
+router.post('/users/logout', auth, async (req, res) => {
+  try {
+    // Filter the array to only one token
+    req.user.tokens = req.user.tokens.filter((token) => token.token !== req.token);
+    await req.user.save();
+    res.send();
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+/**
+ *
+ *
+ * Logout from all devices route for user
+ *
+ *
+ */
+router.post('/users/logoutAll', auth, async (req, res) => {
+  try {
+    // Filter the array to only one token
+    req.user.tokens = [];
+    await req.user.save();
+    res.send();
+  } catch (error) {
+    res.status(500).send();
+  }
+});
+/**
+ *
+ *
  * Get all the users
  *
  *
