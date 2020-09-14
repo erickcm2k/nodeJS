@@ -1,11 +1,16 @@
 const express = require('express');
+const auth = require('../middleware/auth');
 
 const router = new express.Router();
 const Task = require('../models/task');
 
-router.post('/tasks', async (req, res) => {
-  const task = new Task(req.body);
-
+router.post('/tasks', auth, async (req, res) => {
+  // const task = new Task(req.body);
+  // Linking task to a user.
+  const task = new Task({
+    ...req.body,
+    owner: req.user.id,
+  });
   try {
     await task.save(task);
     res.status(201).send(task);
