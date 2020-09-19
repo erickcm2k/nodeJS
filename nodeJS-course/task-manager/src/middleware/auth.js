@@ -6,7 +6,10 @@ const auth = async (req, res, next) => {
     const token = req.header('Authorization').replace('Bearer ', '');
     const decoded = jwt.verify(token, 'thisisacourse');
     // Checks if user has the current token active.
-    const user = await User.findOne({ _id: decoded._id, 'tokens.token': token });
+    const user = await User.findOne({
+      _id: decoded._id,
+      'tokens.token': token,
+    });
     if (!user) {
       throw new Error();
     }

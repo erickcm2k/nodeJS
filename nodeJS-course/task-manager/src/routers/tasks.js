@@ -1,6 +1,5 @@
 const express = require('express');
 const auth = require('../middleware/auth');
-const { findOne } = require('../models/task');
 
 const router = new express.Router();
 const Task = require('../models/task');
@@ -34,14 +33,23 @@ router.post('/tasks', auth, async (req, res) => {
  *
  */
 router.get('/tasks', auth, async (req, res) => {
+  const match = {};
+
+  if (req.query.completed) {
+    match.completed = req.query.completed === 'true';
+  }
   try {
-    const tasks = await Task.find({
-      owner: req.user._id,
-    });
-    res.send(tasks);
+    // Another way
+    // const tasks = await Task.find({
+    //   owner: req.user._id,
+    // });
+    // res.send(tasks);
     // Another way to do the same.
-    // await req.user.populate('tasks').execPopulate();
-    // res.send(req.user.tasks);
+    await req.user.populate('tasks').execPopulate({
+      path: 'tasks',
+      match, // match: match
+    });
+    res.send(req.user.tasks);
   } catch (error) {
     res.status(400).send(error);
   }
