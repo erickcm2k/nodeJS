@@ -1,5 +1,6 @@
 const express = require('express');
 const multer = require('multer');
+const sharp = require('sharp');
 const auth = require('../middleware/auth');
 
 const router = new express.Router();
@@ -157,7 +158,7 @@ router.delete('/users/me', auth, async (req, res) => {
 /**
  *
  *
- * Route for adding a user profile picture
+ * Middleware for avatar
  *
  *
  */
@@ -174,18 +175,52 @@ const upload = multer({
     cb(undefined, true);
   },
 });
-
+/**
+ *
+ *
+ * Add a profile avatar
+ *
+ *
+ */
 router.post('/users/me/avatar', auth, upload.single('upload'), async (req, res) => {
-  req.user.avatar = req.file.buffer;
+  const buffer = await sharp(req.file.buffer).resize({ width: 250, height: 250 }).png().toBuffer();
+  req.user.avatar = buffer;
   await req.user.save();
   res.send();
 }, (error, req, res, next) => {
   res.status(400).send({ error: error.message });
 });
-
+/**
+ *
+ *
+ * Delete user avatar
+ *
+ *
+ */
 router.delete('/users/me/avatar', auth, async (req, res) => {
   req.user.avatar = undefined;
   await req.user.save();
-  res.status.send();
+  res.send();
 });
+/**
+ *
+ *
+ * Get avatar by user id
+ *
+ *
+ */
+router.get('/users/:id/avatar', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user || !user.avatar) {
+      throw new Error('No user avatar found.');
+    }
+
+    res.set('Content-Type', 'image/png');
+    res.send(user.avatar);
+  } catch (error) {
+    res.status(404).send();
+  }
+});
+
 module.exports = router;
