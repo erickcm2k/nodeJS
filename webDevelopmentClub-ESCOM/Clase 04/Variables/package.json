@@ -1,0 +1,15 @@
+{
+  "name": "entorno",
+  "version": "1.0.0",
+  "description": "Como se usan las variables de entorno",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oscar David",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}

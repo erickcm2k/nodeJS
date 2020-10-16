@@ -1,0 +1,19 @@
+Clase 04: Ejemplos de Express, Renderización de Vistas y Variables de Entorno
+
+1.- Al instalar Express aparecio un package-lock.json ¿Qué será?
+2.- Repaso de métodos HTTP
+    -HTTP: Protocolo de transferencia de Hipertexto
+    -GET: Método de envio de parametros cliente a traves de la URL
+    -PUT: Actualizar recursos
+    -POST: Enviar u recurso (Parametros, JSON)
+    -HEAD: 
+3.- Código Express (Base)
+
+4.- Variables de entorno.
+
+5.- Renderización con motores de Vistas
+
+    -Motor de Vistas:
+
+
+6.- Ejemplo con renderización
