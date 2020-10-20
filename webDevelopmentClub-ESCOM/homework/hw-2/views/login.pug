@@ -1,0 +1,22 @@
+div.container(style="padding-top: 70px;")
+    form
+        div.form-group
+                label(for="exampleInputEmail1") Email
+                input(
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Your email")
+                                    
+        div.form-group
+            label(for="exampleInputPassword1") Password
+            input.form-control#exampleInputPassword1(
+                type="password" 
+                placeholder="Password")
+                
+        div.form-check
+            input.form-check-input#exampleCheck1(type="checkbox")
+            label.form-check-label.text-muted(for="exampleCheck1") I agree to terms of service and privacy policy
+
+        buttonbtn.btn.btn-primary(type="submit") Submit
