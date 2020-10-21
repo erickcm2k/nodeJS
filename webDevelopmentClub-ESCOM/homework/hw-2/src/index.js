@@ -13,7 +13,7 @@ app.set('view engine', 'pug');
 // Home directory
 app.get('/', (req, res) => {
   res.render('index', {
-    title: 'Login',
+    title: 'App',
   });
 });
 
