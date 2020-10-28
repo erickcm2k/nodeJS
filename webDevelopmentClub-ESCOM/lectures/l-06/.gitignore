@@ -1,0 +1,8 @@
+#node
+node_modules
+
+#env
+config
+
+#OSX
+.DS_Store
